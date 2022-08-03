@@ -11,7 +11,7 @@ ROOT = str(FILE.parents[0])  # YOLOv5 root directory
 model = torch.hub.load(ROOT, "custom", path=ROOT + "\\reson.pt", source="local")
 
 # 替换上一行本地模型加载为网络加载yolov5s (yolov5s可以写yolov5n - yolov5s - yolov5m - yolov5l - yolov5x)
-# model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+#model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
 # model.cuda() # 指定GPU运行
 
