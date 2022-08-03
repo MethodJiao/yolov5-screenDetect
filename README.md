@@ -4,7 +4,7 @@
 
 2.安装cuda(cpu运行可以跳过)
 
-3.重新安装pytorch gpu版本(cpu运行可以跳过)
+3.重新安装pytorch torchvision gpu版本(cpu运行可以跳过)
 
 4.直接运行master目录下test.py
 
