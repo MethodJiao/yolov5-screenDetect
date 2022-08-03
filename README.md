@@ -1,4 +1,4 @@
-# yoloDemo
+# yoloDemo 实时桌面预测
 1.pip install -r requirements.txt安装依赖
 
 2.安装cuda
