@@ -1,44 +1,30 @@
-# import torch
-
-# # 模型
-# model = torch.hub.load('C:\\Users\\Method-PC\\Desktop\\yoloDemo\\yolov5-master', 'custom', path='C:\\Users\\Method-PC\\Desktop\\yoloDemo\\yolov5-master\\reson.pt', source='local')
-# # model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5n - yolov5x6, custom
-
-# # 图像
-# img = 'https://ultralytics.com/images/zidane.jpg'  # or file, Path, PIL, OpenCV, numpy, list
-
-# # 推理
-# results = model(img)
-
-# # 结果
-# results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
-
-
 import torch
 import numpy as np
 import cv2
 from PIL import ImageGrab
+from pathlib import Path
 
-model = torch.hub.load('C:\\Users\\Method-PC\\Desktop\\yoloDemo\\yolov5-master',\
-     'custom', path='C:\\Users\\Method-PC\\Desktop\\yoloDemo\\yolov5-master\\reson.pt', source='local')
-model.cuda()
-# img = cv2.imread('C:\\Users\\Method-PC\\Desktop\\123.jpeg')
-# img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+FILE = Path(__file__).resolve()
+ROOT = str(FILE.parents[0])  # YOLOv5 root directory
 
-# results = model(img)
+# 本地模型加载 reson.pt 换成 yolov5s.pt也行
+model = torch.hub.load(ROOT, "custom", path=ROOT + "\\reson.pt", source="local")
 
-# results.display(render=True)
-# # results.show()
-# cv2.imshow('window',cv2.cvtColor(results.imgs[0], cv2.COLOR_BGR2RGB))
+# 替换上一行本地模型加载为网络加载yolov5s (yolov5s可以写yolov5n - yolov5s - yolov5m - yolov5l - yolov5x)
+# model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
+# model.cuda() # 指定GPU运行
 
-while(True):
-    screen = np.array(ImageGrab.grab(bbox=(0,0,800,640)))
+while True:
+    # 截取桌面800*600
+    screen = np.array(ImageGrab.grab(bbox=(0, 0, 800, 640)))
     screen = cv2.cvtColor(screen, cv2.COLOR_BGR2RGB)
+    # 推理
     results = model(screen)
     results.display(render=True)
-    # final_result = cv2.cvtColor(results.imgs[0], cv2.COLOR_BGR2RGB)
-    cv2.imshow('window',results.imgs[0])
-    if cv2.waitKey(25) & 0xFF == ord('q'):
+    # 展示窗口并赋予推理后图片
+    cv2.imshow("window", results.imgs[0])
+    # Q键退出
+    if cv2.waitKey(25) & 0xFF == ord("q"):
         cv2.destroyAllWindows()
         break

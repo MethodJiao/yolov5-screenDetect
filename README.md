@@ -1,9 +1,9 @@
 # yoloDemo 实时桌面预测
-1.pip install -r requirements.txt安装依赖
+1.cd到yolov5-master目录下运行 pip install -r requirements.txt 安装依赖
 
-2.安装cuda
+2.安装cuda(cpu运行可以跳过)
 
-3.重新安装pytorch gpu版本
+3.重新安装pytorch gpu版本(cpu运行可以跳过)
 
 4.直接运行master目录下test.py
 
