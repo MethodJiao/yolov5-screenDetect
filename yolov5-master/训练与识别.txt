@@ -1,0 +1,3 @@
+python train.py --img 640 --batch 50 --epochs 100 --data ../datasets/banana/banana.yaml --weights yolov5s.pt --nosave --cache
+
+python ./detect.py --weights ./runs/train/exp4/weights/best.pt --img 640 --conf 0.25 --source ../../123.jpeg
