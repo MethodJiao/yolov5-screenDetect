@@ -6,6 +6,8 @@
 
 3.重新安装pytorch torchvision gpu版本(cpu运行可以跳过)
 
-4.直接运行master目录下test.py
+4.直接运行master目录下screenDetect.py
+
+PS：运行master目录下fasterScreenDetect.py相较screenDetect.py拥有更高帧率，需要安装mss库
 
 ![image](https://user-images.githubusercontent.com/45934872/182556080-52a79789-a5e2-4da0-bf7d-b032ad808a1e.png)
