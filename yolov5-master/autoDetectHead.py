@@ -15,27 +15,30 @@ is_release = True
 
 
 def DrawRect(xmin, ymin, xmax, ymax):
-    hwnd = win32gui.GetDesktopWindow()
+
     hPen = win32gui.CreatePen(win32con.PS_DASH, 1, win32api.RGB(255, 0, 0))  # 定义框颜色
-    win32gui.InvalidateRect(hwnd, None, True)
-    win32gui.UpdateWindow(hwnd)
-    win32gui.RedrawWindow(
-        hwnd,
-        None,
-        None,
-        win32con.RDW_FRAME
-        | win32con.RDW_INVALIDATE
-        | win32con.RDW_UPDATENOW
-        | win32con.RDW_ALLCHILDREN,
-    )
+    # win32gui.InvalidateRect(hwnd, None, True)
+    # win32gui.UpdateWindow(hwnd)
+    # win32gui.RedrawWindow(
+    #     hwnd,
+    #     None,
+    #     None,
+    #     win32con.RDW_FRAME
+    #     | win32con.RDW_INVALIDATE
+    #     | win32con.RDW_UPDATENOW
+    #     | win32con.RDW_ALLCHILDREN,
+    # )
     hwndDC = win32gui.GetDC(hwnd)  # 根据窗口句柄获取窗口的设备上下文DC（Divice Context）
-    win32gui.SelectObject(hwndDC, hPen)
+    old = win32gui.SelectObject(hwndDC, hPen)
     hbrush = win32gui.GetStockObject(win32con.NULL_BRUSH)  # 定义透明画刷
     prebrush = win32gui.SelectObject(hwndDC, hbrush)
     win32gui.Rectangle(
         hwndDC, round(xmin), round(ymin), round(xmax), round(ymax)
     )  # 左上到右下的坐标
-    win32gui.SelectObject(hwndDC, hPen)
+    win32gui.SelectObject(hwndDC, old)
+    win32gui.DeleteObject(hPen)
+    win32gui.DeleteObject(hbrush)
+    win32gui.ReleaseDC(hwnd, hwndDC)
 
 
 class screenpoint:
@@ -116,6 +119,7 @@ def main_while_detect():
 
 
 if __name__ == "__main__":
+    hwnd = win32gui.GetDesktopWindow()
     hDC = win32gui.GetDC(0)
     screen_width = win32print.GetDeviceCaps(hDC, win32con.DESKTOPHORZRES)  # 横向分辨率
     screen_height = win32print.GetDeviceCaps(hDC, win32con.DESKTOPVERTRES)  # 纵向分辨率
