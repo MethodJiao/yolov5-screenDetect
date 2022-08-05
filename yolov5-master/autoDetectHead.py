@@ -16,7 +16,7 @@ is_release = True
 
 def DrawRect(xmin, ymin, xmax, ymax):
     hwnd = win32gui.GetDesktopWindow()
-    hPen = win32gui.CreatePen(win32con.PS_SOLID, 3, win32api.RGB(255, 0, 255))  # 定义框颜色
+    hPen = win32gui.CreatePen(win32con.PS_DASH, 1, win32api.RGB(255, 0, 0))  # 定义框颜色
     win32gui.InvalidateRect(hwnd, None, True)
     win32gui.UpdateWindow(hwnd)
     win32gui.RedrawWindow(
@@ -78,7 +78,8 @@ def main_while_detect():
         xmax = row[2]
         ymin = row[1]
         ymax = row[3]
-        if is_release:
+
+        if is_release:  # 去掉可提高性能
             DrawRect(xmin, ymin, xmax, ymax)
 
         head_point_x = xmin + ((xmax - xmin) / 2)
