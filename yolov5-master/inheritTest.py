@@ -22,6 +22,7 @@ class Brother(Farther):
     def __init__(self, name, age, grad):
         super().__init__(name, age)
 
+
 if __name__ == "__main__":
     sws_1 = Me('张三', 20, '大二')
     sws_1.put_1()
